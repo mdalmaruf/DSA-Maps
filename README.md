@@ -104,7 +104,7 @@ class BinarySearchTreeMap:
 ```
 #### Example of a Map Implemented with a Binary Search Tree using C/C++
 ```cpp
-# C/C++ Implementation
+// C/C++ Implementation
 #include <iostream>
 #include <memory>
 
