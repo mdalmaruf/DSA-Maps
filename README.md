@@ -32,6 +32,39 @@ del phone_book["Bob"]
 for name, number in phone_book.items():
     print(f"{name}: {number}")
 ```
+### Example of Using a Map in C++
+
+```cpp
+#include <iostream>
+#include <map>
+#include <string>
+
+int main() {
+    // Creating a map with initial key-value pairs
+    std::map<std::string, std::string> phone_book = {
+        {"Alice", "555-1234"},
+        {"Bob", "555-9876"},
+        {"Charlie", "555-5678"}
+    };
+
+    // Adding a new key-value pair
+    phone_book["Diana"] = "555-6543";
+
+    // Retrieving a value by its key
+    std::cout << phone_book["Alice"] << std::endl;  // Outputs: 555-1234
+
+    // Deleting a key-value pair
+    phone_book.erase("Bob");
+
+    // Iterating over key-value pairs
+    for (const auto& pair : phone_book) {
+        std::cout << pair.first << ": " << pair.second << std::endl;
+    }
+
+    return 0;
+}
+```
+
 ## Implementations of Maps
 
 Maps can be implemented using various data structures, each offering different performance trade-offs for key operations such as search, insert, and delete.
@@ -46,7 +79,7 @@ Maps can be implemented using various data structures, each offering different p
 - **Description**: Maps can also be implemented using balanced binary search trees, where each node represents a key-value pair, and the tree maintains a specific order to enable efficient searches.
 - **Characteristics**: Provides more consistent performance for operations, especially in the worst case, at the cost of more complex data structure maintenance.
 
-#### Example of a Map Implemented with a Binary Search Tree
+#### Example of a Map Implemented with a Binary Search Tree using Python
 
 ```python
 # Python Implementation
@@ -69,6 +102,77 @@ class BinarySearchTreeMap:
     def get(self, key):
         # Recursive search function goes here
 ```
+#### Example of a Map Implemented with a Binary Search Tree using C/C++
+```cpp
+# C/C++ Implementation
+#include <iostream>
+#include <memory>
+
+template<typename Key, typename Value>
+class TreeNode {
+public:
+    Key key;
+    Value value;
+    std::unique_ptr<TreeNode<Key, Value>> left;
+    std::unique_ptr<TreeNode<Key, Value>> right;
+
+    TreeNode(Key key, Value value) : key(key), value(value), left(nullptr), right(nullptr) {}
+};
+
+template<typename Key, typename Value>
+class BinarySearchTreeMap {
+private:
+    std::unique_ptr<TreeNode<Key, Value>> root;
+
+    void insertHelper(std::unique_ptr<TreeNode<Key, Value>>& node, Key key, Value value) {
+        if (!node) {
+            node = std::make_unique<TreeNode<Key, Value>>(key, value);
+        } else if (key < node->key) {
+            insertHelper(node->left, key, value);
+        } else if (key > node->key) {
+            insertHelper(node->right, key, value);
+        } // Duplicate keys are not inserted in this simple example
+    }
+
+    Value* getHelper(TreeNode<Key, Value>* node, Key key) {
+        if (!node) {
+            return nullptr;
+        } else if (key == node->key) {
+            return &node->value;
+        } else if (key < node->key) {
+            return getHelper(node->left.get(), key);
+        } else {
+            return getHelper(node->right.get(), key);
+        }
+    }
+
+public:
+    BinarySearchTreeMap() : root(nullptr) {}
+
+    void insert(Key key, Value value) {
+        insertHelper(root, key, value);
+    }
+
+    Value* get(Key key) {
+        return getHelper(root.get(), key);
+    }
+};
+
+int main() {
+    BinarySearchTreeMap<int, std::string> map;
+    map.insert(1, "Alice");
+    map.insert(2, "Bob");
+    map.insert(3, "Charlie");
+
+    std::string* name = map.get(1);
+    if (name) {
+        std::cout << *name << std::endl; // Outputs: Alice
+    }
+
+    return 0;
+}
+```
+
 ## Scenarios and Considerations
 
 ### Scenario: Dynamic Data Storage
