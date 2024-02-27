@@ -15,6 +15,7 @@ A Map is a collection that associates unique keys with specific values. It allow
 ### Example of Using a Map in Python
 
 ```python
+# Python Implementation
 # Creating a map with initial key-value pairs
 phone_book = {"Alice": "555-1234", "Bob": "555-9876", "Charlie": "555-5678"}
 
@@ -48,6 +49,7 @@ Maps can be implemented using various data structures, each offering different p
 #### Example of a Map Implemented with a Binary Search Tree
 
 ```python
+# Python Implementation
 # Pseudocode for a simple binary search tree-based map
 
 class TreeNode:
