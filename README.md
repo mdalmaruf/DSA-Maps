@@ -184,6 +184,44 @@ Maps are ideal for situations requiring dynamic association between keys and val
 - **Choice of Implementation**: The selection between hash table-based maps and tree-based maps can significantly affect performance based on expected usage patterns and key distribution.
 - **Key Design**: The design of keys (e.g., how they are hashed in a hash table) can impact performance by affecting collision rates and search efficiency.
 
+## Python's Dictionaries
+
+In Python, the `dict` serves the role of a hash map, providing key-value storage with a hash table implementation. Here's how Python's `dict` compares:
+
+#### Synchronization
+
+Like HashMap, Python's `dict` is not thread-safe by default. For thread-safe operations, Python offers the `threading` module, or you can use higher-level structures from the `collections` module, like `defaultdict` or `OrderedDict`, with external synchronization.
+
+#### Null Values
+
+Python dictionaries allow for `None` (Python's equivalent of null) to be used both as a key and as a value.
+
+#### Iterators
+
+Iterators of Python dictionaries are also fail-fast in terms of the structure of the dictionary changing during iteration.
+
+#### Performance
+
+Python's `dict` is highly optimized for performance, with Python 3.6 making dictionaries ordered by default (preserving insertion order), further aligning with `LinkedHashMap` in Java for certain use cases.
+
+#### Example
+
+Here's a simple Python example demonstrating a dictionary, which is analogous to using a `HashMap` or `Hashtable` in Java:
+
+```python
+# Creating and using a dictionary in Python
+phone_book = {"Alice": "555-1234", "Bob": "555-9876"}
+phone_book["Charlie"] = "555-5678"  # Adding a new key-value pair
+print(phone_book["Alice"])  # Accessing a value
+del phone_book["Bob"]  # Deleting a key-value pair
+
+# Iterating over key-value pairs
+for name, number in phone_book.items():
+    print(f"{name}: {number}")
+
+```
+
+
 ## Conclusion
 
 Maps are versatile data structures critical for efficient data storage and retrieval by key. Understanding their implementations, advantages, and suitable applications enables developers to choose the right map type and implementation for their specific needs, optimizing performance and functionality of software applications.
